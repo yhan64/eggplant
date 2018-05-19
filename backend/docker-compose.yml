@@ -1,0 +1,17 @@
+# Set up database for API server development
+version: "3"
+services:
+  db-postgres:
+    image: postgres:10
+    ports:
+      - "5432:5432"
+    volumes:
+      - /lib/postgresql
+    environment:
+      POSTGRES_PASSWORD: eggplant
+      POSTGRES_USER: eggplant
+      POSTGRES_DB: eggplant
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
