@@ -10,5 +10,5 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => res.send('pageok'));
 
 http.createServer(app).listen(port, () => {
-  console.log(`Started listening on port ${port}!`);
+  console.log(`Started listening on port ${port}!`); // eslint-disable-line no-console
 });
