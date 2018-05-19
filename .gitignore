@@ -5,3 +5,7 @@ node_modules
 # compile
 dist
 **/dist
+
+# test
+test
+**/test
