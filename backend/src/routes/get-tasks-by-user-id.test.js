@@ -1,4 +1,6 @@
-jest.mock('knex', () => (tableName) => {
+import getTasksByUserId from './get-tasks-by-user-id';
+
+jest.mock('../db', () => (tableName) => {
   if (tableName === 'tasks') {
     return {
       where: obj => (
@@ -8,10 +10,10 @@ jest.mock('knex', () => (tableName) => {
   }
   return 'error';
 });
-import getTasksByUserId from './get-tasks-by-user-id';
 
 describe('/get-tasks-by-user-id', () => {
-  it('should return all tasks owned by given user', () => {
+  it('should return all tasks owned by given user', async () => {
+    const callData = [{ id: 'taskId1', userId: '123' }, { id: 'taksId2', userId: '123' }];
     const mockSend = jest.fn();
     const req = {
       body: { userId: '123' }
@@ -20,8 +22,8 @@ describe('/get-tasks-by-user-id', () => {
       send: mockSend
     };
 
-    getTasksByUserId(req, res);
+    await getTasksByUserId(req, res);
 
-    expect(mockSend).toBeCalledWith([{ id: 'taskId1', userId: '123' }, { id: 'taksId2', userId: '123' }]);
+    expect(res.send).toBeCalledWith(callData);
   });
 });
