@@ -1,0 +1,55 @@
+.App {
+  text-align: left;
+}
+
+.App-header {
+  background-color: #222;
+  height: 60px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.App-container {
+  background-color: #eee;
+  height: calc(100vh - 100px);
+  display: flex;
+  justify-content: space-between;
+}
+
+.App-splitter {
+  width: 0px;
+  height: 100%;
+  border-left: 1px inset #555;
+  border-right: 1px inset #555;
+}
+
+.App-chart-area {
+  width: 70%;
+}
+
+.App-detail-area {
+  width: 30%;
+  padding: 0 10px;
+}
+
+.App-input-halfwidth-left {
+  width: calc(50% - 5px);
+  margin-right: 10px !important;
+}
+
+.App-input-halfwidth-right {
+  width: calc(50% - 5px);
+}
+
+.App-save-button-container {
+  margin-top: 10px;
+  text-align: right;
+}
