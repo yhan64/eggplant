@@ -16,8 +16,6 @@ const App = () => (
       <div className="App-splitter" />
       <div className="App-detail-area">
         <CreateTask />
-      </div>
-      <div className="App-detail-area">
         <UpdateTask />
       </div>
     </div>
