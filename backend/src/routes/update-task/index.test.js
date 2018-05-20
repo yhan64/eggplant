@@ -26,12 +26,13 @@ describe(routeNames.UPDATE_TASK, () => {
       send: mockSend
     };
   });
-  it('should update the given task', async () => {
+  // TODO: validate the taskData and don't update it with empty object
+  it('should update task with empty task data', async () => {
     const req = {
       body: {
         userId: 'right user',
+        taskId: 'task Id',
         taskData: {
-          taskId: 'task Id',
         }
       }
     };
@@ -50,12 +51,29 @@ describe(routeNames.UPDATE_TASK, () => {
     expect(mockSend).toBeCalledWith('task Id');
   });
 
+  it('should not update task with valid task data', async () => {
+    const content = 'this is new content';
+    const req = {
+      body: {
+        userId: 'right user',
+        taskId: 'task Id',
+        taskData: {
+          content
+        }
+      }
+    };
+    await updateTask(req, res);
+    expect(mockKnex).toBeCalledWith('tasks');
+    expect(mockWhere).toBeCalledWith({ id: 'task Id' });
+    expect(mockUpdate).toBeCalledWith({ content });
+    expect(mockStatus).not.toBeCalled();
+    expect(mockSend).toBeCalledWith('task Id');
+  });
+
   describe('should validate body', () => {
     it('should validate taskData', async () => {
       const req = {
-        body: {
-          userId: 'right user'
-        }
+        body: { taskId: 'task id' }
       };
 
       await updateTask(req, res);
@@ -65,7 +83,6 @@ describe(routeNames.UPDATE_TASK, () => {
     it('should validate taskId', async () => {
       const req = {
         body: {
-          userId: 'right user',
           taskData: {}
         }
       };
@@ -76,9 +93,8 @@ describe(routeNames.UPDATE_TASK, () => {
     it('should validate dueDate if it exists', async () => {
       const req = {
         body: {
-          userId: 'right user',
+          taskId: 'task Id',
           taskData: {
-            taskId: 'task Id',
             dueDate: '13/10/2018' // dueData should be mm/dd/yyyy format
           }
         }

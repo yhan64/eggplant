@@ -2,20 +2,13 @@ import knex from '../../db';
 import { getMissingMsg } from '../../utils';
 
 function getBodyErr(body) {
-  const requiredBodyFields = ['taskData'];
+  const requiredBodyFields = ['taskData', 'taskId'];
   const bodyMissingMsg = getMissingMsg(body, requiredBodyFields);
   if (bodyMissingMsg) {
     return bodyMissingMsg;
   }
 
-  const { taskData } = body;
-  const requiredTaskFields = ['taskId'];
-  const taskDataMissingMsg = getMissingMsg(taskData, requiredTaskFields);
-  if (taskDataMissingMsg) {
-    return taskDataMissingMsg;
-  }
-
-  const { dueDate } = taskData;
+  const { dueDate } = body.taskData;
   if (dueDate && (new Date(dueDate)).toString() === 'Invalid Date') {
     return 'Invalid dueDate';
   }
@@ -30,9 +23,9 @@ export default async (req, res) => {
     return res.status(400).send(bodyErr);
   }
 
-  const { taskData } = body;
+  const { taskData, taskId } = body;
   const {
-    taskId, content, dueDate, impact, timeNeeded, timeConsumed, status
+    content, dueDate, impact, timeNeeded, timeConsumed, status
   } = taskData;
   let retTaskId;
   try {
