@@ -33,11 +33,18 @@
 
 .App-chart-area {
   width: 70%;
+  height: 100%;
 }
 
 .App-detail-area {
   width: 30%;
   padding: 0 10px;
+  height: 100%;
+}
+
+.App-chart-area {
+  height: 100%;
+  overflow: auto;
 }
 
 .App-input-halfwidth-left {
