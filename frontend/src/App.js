@@ -1,6 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Chart from './Chart';
 import './App.css';
 
 const App = () => {
@@ -26,7 +27,7 @@ const App = () => {
       </header>
       <div className="App-container">
         <div className="App-chart-area">
-          <div id="chartContainer" />
+          <Chart />
         </div>
         <div className="App-splitter" />
         <div className="App-detail-area">
