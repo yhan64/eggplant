@@ -1,11 +1,11 @@
-import getTasksByUserId from './get-tasks-by-user-id';
-import routeNames from '../constants/route-names';
+import getTasksByUserId from '../get-tasks-by-user-id';
+import routeNames from '../../constants/route-names';
 
-jest.mock('../db', () => (tableName) => {
+jest.mock('../../db', () => (tableName) => {
   if (tableName === 'tasks') {
     return {
       where: obj => (
-        [{ id: 'taskId1', userId: obj.userId }, { id: 'taksId2', userId: obj.userId }]
+        [{ id: 'taskId1', userId: obj.user_id }, { id: 'taksId2', userId: obj.user_id }]
       ),
     };
   }
