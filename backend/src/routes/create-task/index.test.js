@@ -45,7 +45,7 @@ describe(routeNames.CREATE_TASK, () => {
       expect(mockStatus).toBeCalledWith(400);
       expect(mockSend).toBeCalledWith('Missing taskData');
     });
-    it('should validate dueDate', async () => {
+    it('should validate dueDate if it exists', async () => {
       const req = {
         body: {
           userId: '123',
