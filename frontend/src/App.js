@@ -26,7 +26,7 @@ const App = () => {
       </header>
       <div className="App-container">
         <div className="App-chart-area">
-          Chart
+          <div id="chartContainer" />
         </div>
         <div className="App-splitter" />
         <div className="App-detail-area">
