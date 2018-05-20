@@ -1,11 +1,34 @@
 import knex from '../../db';
 
+function getMissingMsg(obj, requiredFields) {
+  const missingFields = requiredFields.filter(field => !obj[field]);
+  if (missingFields.length) {
+    return `Missing ${missingFields.join(', ')}`;
+  }
+  return null;
+}
+
+function getBodyErr(body) {
+  const requiredBodyFields = ['userId', 'taskData'];
+  const bodyMissingMsg = getMissingMsg(body, requiredBodyFields);
+  if (bodyMissingMsg) {
+    return bodyMissingMsg;
+  }
+  const { dueDate } = body.taskData;
+  if (dueDate && (new Date(dueDate)).toString() === 'Invalid Date') {
+    return 'Invalid dueDate';
+  }
+  return null;
+}
+
 export default async (req, res) => {
   const { body } = req;
-  const { userId, taskData } = body;
-  if (!taskData) {
-    return res.status(400).send('Mising task data');
+  const bodyErr = getBodyErr(body);
+  if (bodyErr) {
+    return res.status(400).send(bodyErr);
   }
+
+  const { userId, taskData } = body;
   const {
     content, dueDate, impact, timeNeeded
   } = taskData;
@@ -23,3 +46,4 @@ export default async (req, res) => {
   }
   return res.send(taskId);
 };
+

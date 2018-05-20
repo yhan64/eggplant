@@ -15,6 +15,7 @@ export async function up(knex) {
     t.date('due_date');
     t.integer('impact');
     t.enu('status', ['open', 'done', 'closed']);
+    t.integer('time_needed');
     t.integer('time_consumed');
   });
 }
