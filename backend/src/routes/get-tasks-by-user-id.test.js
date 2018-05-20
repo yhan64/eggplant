@@ -1,4 +1,5 @@
 import getTasksByUserId from './get-tasks-by-user-id';
+import routeNames from '../constants/route-names';
 
 jest.mock('../db', () => (tableName) => {
   if (tableName === 'tasks') {
@@ -11,7 +12,7 @@ jest.mock('../db', () => (tableName) => {
   return 'error';
 });
 
-describe('/get-tasks-by-user-id', () => {
+describe(routeNames.GET_TASKS_BY_USER_ID, () => {
   it('should return all tasks owned by given user', async () => {
     const callData = [{ id: 'taskId1', userId: '123' }, { id: 'taksId2', userId: '123' }];
     const mockSend = jest.fn();

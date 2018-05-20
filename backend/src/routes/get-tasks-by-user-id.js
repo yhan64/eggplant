@@ -5,7 +5,7 @@ export default async (req, res) => {
 
   try {
     const tasks = await knex('tasks').where({
-      userId: body.userId
+      user_id: body.userId
     });
     res.send(tasks);
   } catch (ex) {
