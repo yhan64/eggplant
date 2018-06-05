@@ -31,13 +31,13 @@ if [[ ($WITH_CLEAN == "1") || ($CLEAN_ONLY == '1') ]]; then
   step="Running 'stop all containers' ..."
   echo "----------------------------------------------"
   echo "$step"
-  for i in api db-postgres adminer; do docker stop landlordhelperserver_${i}_1 2>/dev/null; done
+  for i in api db-postgres adminer; do docker stop backend_${i}_1 2>/dev/null; done
   errorHandler 0 " " # ignore error if container doesn't exist
 
   step="Running 'remove all containers' ..."
   echo "----------------------------------------------"
   echo "$step"
-  for i in api db-postgres adminer; do docker rm landlordhelperserver_${i}_1 2>/dev/null; done
+  for i in api db-postgres adminer; do docker rm backend_${i}_1 2>/dev/null; done
   errorHandler 0 " " # ignore error if container doesn't exist
 
   if [[ ($CLEAN_ONLY == '1') ]]; then
@@ -50,7 +50,7 @@ fi
 #=====================================================
 if [[ ($ALL == "1") ]]; then
   execCMD 'docker-compose -f docker-compose-all.yml up --build  -d'
-  execCMD 'docker exec -it landlordhelperserver_api_1 npm run migrate'
+  execCMD 'docker exec -it backend_api_1 npm run migrate'
   bail
 fi
 

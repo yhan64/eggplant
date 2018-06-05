@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Chart from './components/Chart';
 import CreateTask from './components/CreateTask';
+import UpdateTask from './components/UpdateTask';
 import './App.css';
 
 const App = () => (
@@ -26,6 +27,7 @@ const App = () => (
       <div className="App-splitter" />
       <div className="App-detail-area">
         <CreateTask />
+        <UpdateTask />
       </div>
     </div>
   </div>
