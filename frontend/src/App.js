@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
 import Chart from './components/Chart';
 import CreateTask from './components/CreateTask';
 import './App.css';
@@ -10,6 +12,15 @@ const App = () => (
     </header>
     <div className="App-container">
       <div className="App-chart-area">
+        <Button
+          variant="fab"
+          mini
+          color="primary"
+          aria-label="add"
+          className="App-add-button"
+        >
+          <AddIcon />
+        </Button>
         <Chart />
       </div>
       <div className="App-splitter" />

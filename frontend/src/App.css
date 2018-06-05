@@ -31,20 +31,26 @@
   border-right: 1px inset #555;
 }
 
+.App-add-button {
+  margin: 0px;
+  top: auto;
+  right: calc(30% + 50px);
+  bottom: 20px;
+  left: auto;
+  position: fixed !important;
+  z-index: 10;
+}
+
 .App-chart-area {
   width: 70%;
   height: 100%;
+  overflow: auto;
 }
 
 .App-detail-area {
   width: 30%;
   padding: 0 10px;
   height: 100%;
-}
-
-.App-chart-area {
-  height: 100%;
-  overflow: auto;
 }
 
 .App-input-halfwidth-left {
