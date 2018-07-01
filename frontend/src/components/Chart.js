@@ -22,6 +22,8 @@ class Chart extends React.Component {
       },
 
       xAxis: {
+        min: 0.5,
+        max: 10.5,
         title: {
           enabled: true,
           text: 'Impact'
@@ -45,7 +47,7 @@ class Chart extends React.Component {
         plotLines: [{
           color: '#FF0000',
           width: 2,
-          value: 0.1,
+          value: 500,
           zIndex: 3,
         }],
       },
@@ -74,7 +76,8 @@ class Chart extends React.Component {
       },
 
       series: [{
-        data: this.props.data
+        name: 'Tasks',
+        data: this.props.data,
       }]
     });
   }

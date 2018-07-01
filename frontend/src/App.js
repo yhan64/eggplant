@@ -13,7 +13,8 @@ const rawData = [];
 
 const getUrgency = (dateStr, expectedDays) => {
   const timeDiff = new Date(dateStr) - new Date();
-  return (expectedDays * 86400000) / timeDiff;
+  const em = (expectedDays * 86400000) / timeDiff;
+  return Math.floor(em * 10000);
 };
 
 const getData = () => rawData.map(t => ({
