@@ -1,8 +1,11 @@
 import React from 'react';
 import Highcharts from 'highcharts';
+import PropTypes from 'prop-types';
 
 class Chart extends React.Component {
   componentDidMount() {
+    const serieClick = this.props.onSerieClick;
+
     Highcharts.chart('chartContainer', {
       chart: {
         type: 'bar'
@@ -16,7 +19,7 @@ class Chart extends React.Component {
           cursor: 'pointer',
           events: {
             click: (event) => {
-              console.log(event.point.options);
+              serieClick(event.point.options);
             }
           }
         }
@@ -31,5 +34,9 @@ class Chart extends React.Component {
     return <div id="chartContainer" />;
   }
 }
+
+Chart.propTypes = {
+  onSerieClick: PropTypes.func,
+};
 
 export default Chart;
