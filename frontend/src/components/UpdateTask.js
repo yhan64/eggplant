@@ -3,6 +3,11 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import CreateUpdateCommon from './CreateUpdateCommon';
 
+const container = {
+  height: '100%',
+  overflow: 'auto',
+};
+
 const UpdateTask = () => {
   const state = {
     content: 'Finish Eggplant',
@@ -20,7 +25,7 @@ const UpdateTask = () => {
   };
 
   return (
-    <div>
+    <div style={container}>
       <CreateUpdateCommon handleChange={handleChange} />
       <div>
         <TextField
