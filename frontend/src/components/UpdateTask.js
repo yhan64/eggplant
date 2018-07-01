@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import CreateUpdateCommon from './CreateUpdateCommon';
@@ -8,7 +9,7 @@ const container = {
   overflow: 'auto',
 };
 
-const UpdateTask = () => {
+const UpdateTask = (props) => {
   const state = {
     content: 'Finish Eggplant',
     dueDate: new Date().toLocaleDateString(),
@@ -21,7 +22,7 @@ const UpdateTask = () => {
     state[key] = event.target.value;
   };
   const handleSaveNew = () => {
-    console.log('Save new task', state);
+    props.onUpdateTask(state);
   };
 
   return (
@@ -56,6 +57,10 @@ const UpdateTask = () => {
       </div>
     </div>
   );
+};
+
+UpdateTask.propTypes = {
+  onUpdateTask: PropTypes.func,
 };
 
 export default UpdateTask;

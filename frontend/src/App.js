@@ -34,6 +34,14 @@ class App extends React.Component {
     });
   };
 
+  createTask = (task) => {
+    console.log(task);
+  };
+
+  updateTask = (task) => {
+    console.log(task);
+  };
+
   toggleAdd = () => {
     this.setState({ rightPanelState: ADD_STATE });
   };
@@ -66,10 +74,10 @@ class App extends React.Component {
           <div className="App-splitter" />
           <div className="App-detail-area">
             {this.state.rightPanelState === ADD_STATE &&
-              <CreateTask />
+              <CreateTask onCreateTask={this.createTask} />
             }
             {this.state.rightPanelState === EDIT_STATE &&
-              <UpdateTask />
+              <UpdateTask onUpdateTask={this.updateTask} />
             }
           </div>
         </div>

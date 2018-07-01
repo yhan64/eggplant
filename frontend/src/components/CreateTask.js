@@ -1,14 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import CreateUpdateCommon from './CreateUpdateCommon';
 
-const CreateTask = () => {
+const CreateTask = (props) => {
   const state = {};
   const handleChange = key => (event) => {
     state[key] = event.target.value;
   };
   const handleSaveNew = () => {
-    console.log('Save new task', state);
+    props.onCreateTask(state);
   };
 
   return (
@@ -25,6 +26,10 @@ const CreateTask = () => {
       </div>
     </div>
   );
+};
+
+CreateTask.propTypes = {
+  onCreateTask: PropTypes.func,
 };
 
 export default CreateTask;
