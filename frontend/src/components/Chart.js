@@ -8,13 +8,48 @@ class Chart extends React.Component {
 
     Highcharts.chart('chartContainer', {
       chart: {
-        type: 'bar'
+        type: 'scatter'
       },
+
       xAxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        title: {
+          enabled: true,
+          text: 'Impact'
+        },
+        plotLines: [{
+          color: '#FF0000',
+          width: 2,
+          value: 1,
+          zIndex: 3,
+        }],
+      },
+
+      yAxis: {
+        title: {
+          text: 'Urgent'
+        },
+
+        plotLines: [{
+          color: '#FF0000',
+          width: 2,
+          value: 2.2,
+          zIndex: 3,
+        }],
       },
 
       plotOptions: {
+        scatter: {
+          dataLabels: {
+            format: '{point.name}',
+            enabled: true,
+          },
+
+          tooltip: {
+            headerFormat: '<b>{point.key}</b><br/>',
+            pointFormat: 'Impact: {point.x}, Urgent: {point.y}'
+          },
+        },
+
         series: {
           cursor: 'pointer',
           events: {
@@ -26,7 +61,7 @@ class Chart extends React.Component {
       },
 
       series: [{
-        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+        data: this.props.data
       }]
     });
   }
@@ -37,6 +72,7 @@ class Chart extends React.Component {
 
 Chart.propTypes = {
   onSerieClick: PropTypes.func,
+  data: PropTypes.array,
 };
 
 export default Chart;
