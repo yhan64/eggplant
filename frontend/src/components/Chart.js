@@ -4,9 +4,19 @@ import PropTypes from 'prop-types';
 
 class Chart extends React.Component {
   componentDidMount() {
-    const serieClick = this.props.onSerieClick;
+    this.showChart();
+  }
 
-    Highcharts.chart('chartContainer', {
+  componentDidUpdate() {
+    this.chart.series[0].setData(this.props.data, true);
+  }
+
+  chart = undefined;
+  showChart() {
+    const serieClick = this.props.onSerieClick;
+    console.log(this.props.data);
+
+    this.chart = Highcharts.chart('chartContainer', {
       chart: {
         type: 'scatter'
       },
@@ -19,12 +29,15 @@ class Chart extends React.Component {
         plotLines: [{
           color: '#FF0000',
           width: 2,
-          value: 1,
+          value: 5.5,
           zIndex: 3,
         }],
       },
 
       yAxis: {
+        type: 'logarithmic',
+        minorTickInterval: 0.1,
+
         title: {
           text: 'Urgent'
         },
@@ -32,7 +45,7 @@ class Chart extends React.Component {
         plotLines: [{
           color: '#FF0000',
           width: 2,
-          value: 2.2,
+          value: 0.1,
           zIndex: 3,
         }],
       },
@@ -65,6 +78,7 @@ class Chart extends React.Component {
       }]
     });
   }
+
   render() {
     return <div id="chartContainer" />;
   }

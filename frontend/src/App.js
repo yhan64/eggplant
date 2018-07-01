@@ -9,15 +9,18 @@ import './App.css';
 const ADD_STATE = 0;
 const EDIT_STATE = 1;
 
-const getData = () => [
-  { name: 'task 1', x: 0.5, y: 0.9 },
-  { name: 'task 2', x: 1.5, y: 1.9 },
-  { name: 'task 3', x: 0.9, y: 1.5 },
-  { name: 'task 4', x: 1.2, y: 1.4 },
-  { name: 'task 5', x: 1.4, y: 1.2 },
-  { name: 'task 6', x: 1.2, y: 3.0 },
-  { name: 'task 7', x: 1.8, y: 2.1 },
-];
+const rawData = [];
+
+const getUrgency = (dateStr, expectedDays) => {
+  const timeDiff = new Date(dateStr) - new Date();
+  return (expectedDays * 86400000) / timeDiff;
+};
+
+const getData = () => rawData.map(t => ({
+  name: t.content,
+  x: parseFloat(t.impact),
+  y: getUrgency(t.dueDate, t.timeNeeded),
+}));
 
 class App extends React.Component {
   constructor(props) {
@@ -35,7 +38,8 @@ class App extends React.Component {
   };
 
   createTask = (task) => {
-    console.log(task);
+    rawData.push(task);
+    this.updateData();
   };
 
   updateTask = (task) => {
