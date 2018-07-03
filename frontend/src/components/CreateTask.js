@@ -4,9 +4,17 @@ import Button from '@material-ui/core/Button';
 import CreateUpdateCommon from './CreateUpdateCommon';
 
 const CreateTask = (props) => {
-  const state = {};
-  const handleChange = key => (event) => {
-    state[key] = event.target.value;
+  const state = {
+    content: '',
+    dueDate: '',
+    impact: '',
+    timeNeeded: '',
+  };
+  const handleChange = (fieldValues, f) => {
+    Object.keys(state).forEach((k) => {
+      state[k] = fieldValues[k];
+    });
+    console.log(fieldValues, state, f);
   };
   const handleSaveNew = () => {
     props.onCreateTask(state);
