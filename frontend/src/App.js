@@ -14,7 +14,7 @@ const rawData = [];
 const getUrgency = (dateStr, expectedDays) => {
   const timeDiff = new Date(dateStr) - new Date();
   const em = (expectedDays * 86400000) / timeDiff;
-  return Math.floor(em * 10000);
+  return Math.max(-1, Math.floor(em * 10000));
 };
 
 const getData = () => rawData.map(t => ({
@@ -41,7 +41,6 @@ class App extends React.Component {
   createTask = (task) => {
     rawData.push(task);
     this.updateData();
-    console.log('Current list', rawData);
   };
 
   updateTask = (task) => {

@@ -2,13 +2,21 @@ import React from 'react';
 import Highcharts from 'highcharts';
 import PropTypes from 'prop-types';
 
+const COLOR_LIGHTBLUE = '#7cb5ec';
+
 class Chart extends React.Component {
   componentDidMount() {
     this.showChart();
   }
 
   componentDidUpdate() {
-    this.chart.series[0].setData(this.props.data, true);
+    this.chart.update({
+      series: [{
+        name: 'Tasks',
+        color: COLOR_LIGHTBLUE,
+        data: this.props.data,
+      }],
+    });
   }
 
   chart = undefined;
@@ -18,7 +26,11 @@ class Chart extends React.Component {
 
     this.chart = Highcharts.chart('chartContainer', {
       chart: {
-        type: 'scatter'
+        type: 'scatter',
+        zoomType: 'xy',
+        marginLeft: 50,
+        marginRight: 20,
+        height: `${(9 / 16) * 100}%`,
       },
 
       xAxis: {
@@ -38,10 +50,19 @@ class Chart extends React.Component {
 
       yAxis: {
         type: 'logarithmic',
+        max: 100000,
+        min: 1,
         minorTickInterval: 0.1,
 
         title: {
-          text: 'Urgent'
+          text: 'Urgent (high)',
+          align: 'high',
+          style: {
+            'text-anchor': 'start'
+          },
+          rotation: 0,
+          y: -10,
+          x: 15
         },
 
         plotLines: [{
@@ -77,6 +98,7 @@ class Chart extends React.Component {
 
       series: [{
         name: 'Tasks',
+        color: COLOR_LIGHTBLUE,
         data: this.props.data,
       }]
     });
