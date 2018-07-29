@@ -25,6 +25,10 @@ class Chart extends React.Component {
     console.log(this.props.data);
 
     this.chart = Highcharts.chart('chartContainer', {
+      title: {
+        text: 'Active Tasks',
+      },
+
       chart: {
         type: 'scatter',
         zoomType: 'xy',
@@ -33,12 +37,20 @@ class Chart extends React.Component {
         height: `${(9 / 16) * 100}%`,
       },
 
+      legend: {
+        align: 'left',
+        verticalAlign: 'bottom',
+        x: 0,
+        y: 0,
+        floating: true
+      },
+
       xAxis: {
         min: 0.5,
         max: 10.5,
         title: {
-          enabled: true,
-          text: 'Impact'
+          text: 'Impact (high)',
+          align: 'high',
         },
         plotLines: [{
           color: '#FF0000',
@@ -100,7 +112,9 @@ class Chart extends React.Component {
         name: 'Tasks',
         color: COLOR_LIGHTBLUE,
         data: this.props.data,
-      }]
+      }],
+
+      credits: false,
     });
   }
 
