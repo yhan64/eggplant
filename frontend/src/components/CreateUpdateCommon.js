@@ -2,25 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 
-const formatDate = (d) => {
+export const formatDate = (d) => {
   const y = d.getFullYear();
   const m = `0${d.getMonth() + 1}`.slice(-2);
   const dd = `0${d.getDate()}`.slice(-2);
   return `${y}-${m}-${dd}`;
 };
 
-class CreateUpdateCommon extends React.Component {
+export class CreateUpdateCommon extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      dueDate: formatDate(new Date()),
-      impact: 5,
-      timeNeeded: 1,
-    };
+    this.state = { ...this.props.initValues };
   }
 
-  onChange(obj) {
-    this.setState(obj);
+  async onChange(obj) {
+    await this.setState(obj);
     this.props.handleChange(this.state);
   }
 
@@ -77,6 +73,7 @@ class CreateUpdateCommon extends React.Component {
 }
 
 CreateUpdateCommon.propTypes = {
+  initValues: PropTypes.object,
   handleChange: PropTypes.func,
 };
 

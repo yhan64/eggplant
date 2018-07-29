@@ -1,20 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
-import CreateUpdateCommon from './CreateUpdateCommon';
+import { formatDate, CreateUpdateCommon } from './CreateUpdateCommon';
 
 const CreateTask = (props) => {
   const state = {
     content: '',
-    dueDate: '',
-    impact: '',
-    timeNeeded: '',
+    dueDate: formatDate(new Date()),
+    impact: 5,
+    timeNeeded: 1,
   };
-  const handleChange = (fieldValues, f) => {
+  const handleChange = (fieldValues) => {
     Object.keys(state).forEach((k) => {
       state[k] = fieldValues[k];
     });
-    console.log(fieldValues, state, f);
   };
   const handleSaveNew = () => {
     props.onCreateTask(state);
@@ -22,7 +21,7 @@ const CreateTask = (props) => {
 
   return (
     <div>
-      <CreateUpdateCommon handleChange={handleChange} />
+      <CreateUpdateCommon initValues={state} handleChange={handleChange} />
       <div className="App-save-button-container">
         <Button
           variant="raised"

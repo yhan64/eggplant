@@ -41,6 +41,7 @@ class App extends React.Component {
   createTask = (task) => {
     rawData.push(task);
     this.updateData();
+    console.log('Current list', rawData);
   };
 
   updateTask = (task) => {
