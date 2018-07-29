@@ -9,72 +9,75 @@ const formatDate = (d) => {
   return `${y}-${m}-${dd}`;
 };
 
-const CreateUpdateCommon = (props) => {
-  const {
-    handleChange, state,
-  } = props;
+class CreateUpdateCommon extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dueDate: formatDate(new Date()),
+      impact: 5,
+      timeNeeded: 1,
+    };
+  }
 
-  const fieldValues = {};
-  const onChange = (key, val) => {
-    fieldValues[key] = val;
-    handleChange(fieldValues);
-  };
+  onChange(obj) {
+    this.setState(obj);
+    this.props.handleChange(this.state);
+  }
 
-  return (
-    <div>
+  render() {
+    return (
       <div>
-        <TextField
-          id="content"
-          label="Content"
-          fullWidth
-          margin="normal"
-          value={fieldValues.content}
-          onChange={event => onChange('content', event.target.value)}
-        />
+        <div>
+          <TextField
+            id="content"
+            label="Content"
+            fullWidth
+            margin="normal"
+            value={this.state.content}
+            onChange={event => this.onChange({ content: event.target.value })}
+          />
+        </div>
+        <div>
+          <TextField
+            id="dueDate"
+            label="Due Date (mm/dd/yyyy)"
+            fullWidth
+            margin="normal"
+            type="date"
+            inputProps={{ min: formatDate(new Date()) }}
+            value={this.state.dueDate}
+            onChange={event => this.onChange({ dueDate: event.target.value })}
+          />
+        </div>
+        <div>
+          <TextField
+            id="impact"
+            label="Impact (1-10)"
+            className="App-input-halfwidth-left"
+            margin="normal"
+            type="number"
+            inputProps={{ min: '1', max: '10', step: '1' }}
+            value={this.state.impact}
+            onChange={event => this.onChange({ impact: event.target.value })}
+          />
+          <TextField
+            id="timeNeeded"
+            label="Time Needed (days)"
+            className="App-input-halfwidth-right"
+            margin="normal"
+            type="number"
+            inputProps={{ min: '0' }}
+            value={this.state.timeNeeded}
+            onChange={event => this.onChange({ timeNeeded: event.target.value })}
+          />
+        </div>
       </div>
-      <div>
-        <TextField
-          id="dueDate"
-          label="Due Date (mm/dd/yyyy)"
-          fullWidth
-          margin="normal"
-          type="date"
-          defaultValue={formatDate(new Date())}
-          inputProps={{ min: formatDate(new Date()) }}
-          value={fieldValues.dueDate}
-          onChange={event => onChange('dueDate', event.target.value)}
-        />
-      </div>
-      <div>
-        <TextField
-          id="impact"
-          label="Impact (1-10)"
-          className="App-input-halfwidth-left"
-          margin="normal"
-          type="number"
-          inputProps={{ min: '1', max: '10', step: '1' }}
-          defaultValue={5}
-          value={fieldValues.impact}
-          onChange={event => onChange('impact', event.target.value)}
-        />
-        <TextField
-          id="timeNeeded"
-          label="Time Needed (days)"
-          className="App-input-halfwidth-right"
-          margin="normal"
-          type="number"
-          inputProps={{ min: '0' }}
-          defaultValue={1}
-          value={fieldValues.timeNeeded}
-          onChange={event => onChange('timeNeeded', event.target.value)}
-        />
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 CreateUpdateCommon.propTypes = {
-  handleChange: PropTypes.func.isRequired,
+  handleChange: PropTypes.func,
 };
 
 export default CreateUpdateCommon;
